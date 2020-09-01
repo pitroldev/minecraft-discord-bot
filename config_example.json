@@ -5,7 +5,6 @@
     "port": "INSERT_RCON_PORT",
     "password": "INSERT_RCON_PASSWORD"
   },
-  "linkToMinecraftClient": "INSERT_LINK_TO_CLIENT",
   "serverVersion": "INSERT_SERVER_VERSION",
   "serverIP": "INSERT_SERVER_IP",
   "serverPort": "INSERT_SERVER_PORT",
