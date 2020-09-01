@@ -62,9 +62,7 @@ module.exports = {
       const { serverIP, serverVersion, linkToMinecraftClient } = config;
 
       const infoString =
-        "```" +
-        `IP: ${serverIP}\nVersão: ${serverVersion}\n\nLink para baixar o Minecraft: ${linkToMinecraftClient}` +
-        "```";
+        "```" + `IP: ${serverIP}\nVersão: ${serverVersion}` + "```";
 
       console.log(
         `[${new Date()}]: ${msg.author.username} >>> ServerInfo Command`
@@ -114,7 +112,14 @@ module.exports = {
       console.log(`[${new Date()}]: ${msg.author.username} >>> SERVER STARTED`);
 
       return setTimeout(async () => {
-        await client.connect();
+        await client
+          .connect()
+          .then(() =>
+            console.log(`[${new Date()}] RCON: Conectado com sucesso.`)
+          )
+          .catch(() =>
+            console.log(`[${new Date()}] RCON: Erro ao conectar ao servidor.`)
+          );
         msg.reply("servidor inicializado com sucesso!");
       }, 30000);
     } catch (err) {

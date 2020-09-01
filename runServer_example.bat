@@ -1,4 +1,4 @@
 @ECHO OFF
 
-cd path/to/server/run/folder
+cd C:/path/to/server/run/folder
 call run.bat
