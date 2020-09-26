@@ -1,51 +1,36 @@
-const request = require("request");
-const cheerio = require("cheerio");
+const axios = require("axios");
 
 const config = require("./config.json");
 
 module.exports = {
   async checkIfPortIsOpen(serverReload) {
     try {
-      const { serverIP, serverPort } = config;
-      const url = "https://portchecker.co/";
+      const { serverIP, serverPort, portCheckerURI } = config;
 
-      const options = {
-        method: "POST",
-        url,
-        headers: {
-          "content-type":
-            "multipart/form-data; boundary=---011000010111000001101001",
-        },
-        formData: { target_ip: serverIP, port: serverPort },
-      };
+      const portCheckerAPI = axios.create({ baseURL: portCheckerURI });
 
       console.log(
         `[${new Date()}] AUTOMATIC PORT CHECK: Checking Port Status...`
       );
 
-      request(options, function (error, response, body) {
-        if (error) throw new Error(error);
-
-        const $ = cheerio.load(body);
-
-        const isOpen = $(".smaller-on-mobile span").text() === "open";
-
-        //check server online
-        // initserver
-
-        if (!isOpen) {
-          serverReload();
-        } else {
-          console.log(
-            `[${new Date()}] AUTOMATIC PORT CHECK: Server Port is OK.`
-          );
-        }
+      const response = await portCheckerAPI.post("/", {
+        host: serverIP,
+        port: serverPort,
       });
+
+      const { isPortReachable } = response.data;
+
+      if (isPortReachable) {
+        return console.log(`[${new Date()}] AUTOMATIC PORT CHECK: Port is OK!`);
+      } else {
+        console.log(`[${new Date()}] AUTOMATIC PORT CHECK: Port is Closed.`);
+        return await serverReload();
+      }
     } catch (err) {
       console.log(
-        `[${new Date()}] AUTOMATIC PORT CHECK: Cant Connect to portchecker.co`
+        `[${new Date()}] AUTOMATIC PORT CHECK: Cant Connect to PortCheckerAPI`
       );
-      serverReload();
+      await serverReload();
       //check server online
       // initserver
     }

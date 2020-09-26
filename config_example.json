@@ -6,6 +6,7 @@
     "password": "INSERT_RCON_PASSWORD"
   },
   "serverVersion": "INSERT_SERVER_VERSION",
+  "portCheckerURI": "INSERT_YOUR_PORTCHECKER_API",
   "serverIP": "INSERT_SERVER_IP",
   "serverPort": "INSERT_SERVER_PORT",
   "discordTextChannel": "INSER_DISCORD_TEXT_CHANNEL_OR_LEAVE_BLANK_TO_ALL_CHANNELS",

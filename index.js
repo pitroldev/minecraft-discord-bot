@@ -6,9 +6,9 @@ const config = require("./config.json");
 const services = require("./services.js");
 const commands = require("./commands.js");
 
-const { host, password } = config.serverRcon;
+const { host, password, timeout } = config.serverRcon;
 
-const client = new Rcon(host, password, 10000);
+const client = new Rcon(host, password, timeout);
 
 async function serverConnect() {
   await client
@@ -21,7 +21,7 @@ async function serverConnect() {
   async function serverReload() {
     try {
       console.log(`[${new Date()}] AUTOMATIC PORT CHECK: Server Reload.`);
-      await client.send("reload");
+      await client.send("reload confirm");
     } catch (err) {
       console.log(`[${new Date()}] RCON: Erro ao executar reload automático.`);
     }
@@ -56,21 +56,26 @@ function discordBotStart() {
 }
 
 function botCommands(msg) {
-  switch (msg.content) {
-    case "/mine reload": {
+  const commandString = msg.content.toLowerCase();
+  const registerRegex = /[/mine register]/g;
+  switch (true) {
+    case commandString === "/mine reload": {
       return commands.serverReload(msg, client);
     }
-    case "/mine start": {
+    case commandString === "/mine start": {
       return commands.serverStart(msg, client);
     }
-    case "/mine status": {
+    case commandString === "/mine status": {
       return commands.serverStatus(msg, client);
     }
-    case "/mine info": {
+    case commandString === "/mine info": {
       return commands.serverInfo(msg);
     }
-    case "/mine seed": {
+    case commandString === "/mine seed": {
       return commands.serverSeed(msg, client);
+    }
+    case registerRegex.test(commandString): {
+      return commands.serverRegister(msg, client);
     }
     default:
       return commands.helpCommand(msg);

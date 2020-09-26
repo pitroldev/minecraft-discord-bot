@@ -10,9 +10,8 @@
   "author": "Petro Cardoso",
   "license": "MIT",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
+    "axios": "^0.20.0",
     "discord.js": "^12.3.1",
-    "modern-rcon": "^1.0.3",
-    "request": "^2.88.2"
+    "modern-rcon": "^1.0.3"
   }
 }
