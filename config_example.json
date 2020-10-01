@@ -5,6 +5,8 @@
     "port": "INSERT_RCON_PORT",
     "password": "INSERT_RCON_PASSWORD"
   },
+  "serverIP": "INSERT_SERVER_IP",
+  "serverPort": "INSERT_SERVER_PORT",
   "portCheckerURI": "INSERT_YOUR_PORTCHECKER_API",
   "discordTextChannel": "INSERT_DISCORD_TEXTCHANNEL_OR_LEAVE_BLANK_TO_ALL_TEXTCHANNELS",
   "checkPortIntervalMin": 60
