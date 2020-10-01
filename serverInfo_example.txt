@@ -1,0 +1,5 @@
+IP: 
+Versão: 
+
+
+Se registre usando /mine register <SeuUsername>

@@ -1,7 +1,7 @@
 {
   "name": "mine-discord-bot",
   "version": "1.0.0",
-  "description": "Bot para administrar o servidor de minecraft via discord. ",
+  "description": "Bot para administrar o servidor de minecraft via discord.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

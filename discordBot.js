@@ -1,8 +1,7 @@
 const Discord = require("discord.js");
+const fs = require("fs");
 
 const config = require("./config.json");
-
-const Server = require("./minecraftServer.js");
 
 class DiscordBot {
   constructor(server) {
@@ -55,12 +54,9 @@ class DiscordBot {
 
   serverInfo(msg) {
     try {
-      const { serverIP, serverVersion, linkToMinecraftClient } = config;
+      const infoText = fs.readFileSync("./serverInfo.txt", "utf8");
 
-      const infoString =
-        "```" +
-        `IP: ${serverIP}\nVersão: ${serverVersion}\n\nBaixe o Java 64 bits: https://www.java.com/pt_BR/download/manual.jsp\nBaixe o Minecraft: https://skmedix.pl/sklauncher/downloads\nEscolha sua Skin: https://pt.namemc.com/minecraft-skins\nCrie sua conta: https://skmedix.pl/sklauncher/register\n\nSe registre usando /mine register <SeuUsername>` +
-        "```";
+      const infoString = "```" + infoText + "```";
 
       console.log(
         `[${new Date()}]: ${msg.author.username} >>> ServerInfo Command`
