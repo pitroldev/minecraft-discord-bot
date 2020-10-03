@@ -269,6 +269,7 @@ class Server {
   async checkIfPortIsOpen() {
     try {
       if (!this.isOnline) {
+        clearInterval(this.portCheck);
         return console.log(
           `[${new Date()}] AUTOMATIC PORT CHECK: Server is OFFLINE, nothing to check.`
         );
